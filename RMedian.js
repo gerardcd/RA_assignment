@@ -20,9 +20,9 @@ RMedian.findMedian = (S) => {
 
     let C = S.filter((x) => d <= x && x <= u);
     let ld = S.filter((x) => x < d).length;
-    let lu = S.filter((x) => u > x).length;
+    let lu = S.filter((x) => u < x).length;
 
-    if (ld > n/2 || lu < n/2 || C.length > 4*nR) {
+    if (ld > n/2 || lu > n/2 || C.length > 4*nR) {
         return false;
     }
 
