@@ -18,9 +18,18 @@ RMedian.findMedian = (S) => {
     let d = R[dIndex];
     let u = R[uIndex];
 
-    let C = S.filter((x) => d <= x && x <= u);
-    let ld = S.filter((x) => x < d).length;
-    let lu = S.filter((x) => u < x).length;
+    let C = [];
+    let ld = 0;
+    let lu = 0;
+
+    for (let i=0; i<S.length; i++){
+        let x = S[i];
+
+        if (d <= x && x <= u) C.push(x);
+        if (x < d) ld++;
+        if (u < x) lu++;
+
+    }
 
     if (ld > n/2 || lu > n/2 || C.length > 4*nR) {
         return false;
