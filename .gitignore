@@ -1,0 +1,5 @@
+data_backup/*
+.idea/*
+*.csv
+.RData
+.Rhistory
