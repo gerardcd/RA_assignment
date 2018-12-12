@@ -10,7 +10,7 @@ quickSelect.findMedian = (L) => {
 		return quickSelect.select(L, Math.floor(l / 2));
 	}
 	else {
-		let b = quickSelect.select(L, l / 2);
+		let b = quickSelect.select(L, Math.floor(l / 2));
 
 		let a = -1;
 		for (let i=0; i<l/2; i++){

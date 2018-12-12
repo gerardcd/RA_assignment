@@ -7,13 +7,22 @@ const quickSort = require('./quickSort');
 const RMedian = require('./RMedian');
 const utils = require('./utils');
 
-const AVG_INSTANCES = 5; //20
-const MAX_INSTANCE_SIZE_K = 50; //1000
-const INSTANCE_SIZE_STEP = 1; //20
+
+const AVG_INSTANCES = 5;
+const INI_INSTANCE_SIZE_K = 1;
+const MAX_INSTANCE_SIZE_K = 50;
+const INSTANCE_SIZE_STEP = 1;
+
+/*
+const AVG_INSTANCES = 100;
+const INI_INSTANCE_SIZE_K = 50;
+const MAX_INSTANCE_SIZE_K = 50;
+const INSTANCE_SIZE_STEP = 1;
+*/
 
 let generateInstances = (arrayGenerator) => {
     let instances = {};
-    for (let size=INSTANCE_SIZE_STEP; size<MAX_INSTANCE_SIZE_K; size += INSTANCE_SIZE_STEP) {
+    for (let size=INI_INSTANCE_SIZE_K; size<=MAX_INSTANCE_SIZE_K; size += INSTANCE_SIZE_STEP) {
         instances[size] = [];
         for (let i = 0; i < AVG_INSTANCES; i++) {
             let L = arrayGenerator(size * (10 ** 3), 5);
@@ -28,7 +37,7 @@ let run = (algorithm, instances, fileName) => {
     let times = {};
     let results = [];
 
-    for (let size=INSTANCE_SIZE_STEP; size<MAX_INSTANCE_SIZE_K; size += INSTANCE_SIZE_STEP){
+    for (let size=INI_INSTANCE_SIZE_K; size<=MAX_INSTANCE_SIZE_K; size += INSTANCE_SIZE_STEP){
         times[size] = 0;
 
         for (let i=0; i<AVG_INSTANCES; i++){
@@ -46,28 +55,28 @@ let run = (algorithm, instances, fileName) => {
     }
 
     let csv = 'Size, Time';
-    for (let size=INSTANCE_SIZE_STEP; size<MAX_INSTANCE_SIZE_K; size += INSTANCE_SIZE_STEP){
+    for (let size=INI_INSTANCE_SIZE_K; size<=MAX_INSTANCE_SIZE_K; size += INSTANCE_SIZE_STEP){
         csv += '\n ' + size + ', ' + times[size];
     }
 
-    fs.writeFileSync(fileName + '.csv', csv);
+    fs.writeFileSync('complexity_experiment/' + fileName + '.csv', csv);
 
     return results;
 };
 
 let sortedInstances = generateInstances(utils.sortedArray);
-let reversedInstances = generateInstances(utils.reversedArray);
 let randomSetInstances = generateInstances(utils.randomSet);
 
-//clone instances before running algorithms
 let qSelectRandom = run(quickSelect, randomSetInstances, 'quickSelect_random');
 let qSortRandom = run(quickSort, randomSetInstances, 'quickSort_random');
 let RMedianRandom =  run(RMedian, randomSetInstances, 'RMedian_random');
-
 
 let qSelectSorted = run(quickSelect, sortedInstances, 'quickSelect_sorted');
 let qSortSorted = run(quickSort, sortedInstances, 'quickSort_sorted');
 let RMedianSorted =  run(RMedian, sortedInstances, 'RMedian_sorted');
 
-console.log('Quick Sort and RMedian similarity: ' + (utils.arraySimilarity(qSortRandom, RMedianRandom) * 100) + '%');
-console.log('Quick Sort and RMedian similarity: ' + (utils.arraySimilarity(qSortSorted, RMedianSorted) * 100) + '%');
+console.log('Quick Sort and Quick Select similarity (random inputs): ' + (utils.arraySimilarity(qSortRandom, qSelectRandom) * 100) + '%');
+console.log('Quick Sort and Quick Select similarity (sorted inputs): ' + (utils.arraySimilarity(qSortSorted, qSelectSorted) * 100) + '%');
+
+console.log('Quick Sort and RMedian similarity (random inputs): ' + (utils.arraySimilarity(qSortRandom, RMedianRandom) * 100) + '%');
+console.log('Quick Sort and RMedian similarity (sorted inputs): ' + (utils.arraySimilarity(qSortSorted, RMedianSorted) * 100) + '%');

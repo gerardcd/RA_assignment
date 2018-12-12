@@ -13,7 +13,7 @@ utils.swap = (L, i, j) => {
 utils.randomArray = (length, digits) => {
     let L = [];
     for (let i = 0; i<length + 1; i++){
-        L.push(utils.randomInt(1,10**digits));
+        L.push(utils.randomInt(10**(digits - 1), 10**digits));
     }
     return L;
 };
