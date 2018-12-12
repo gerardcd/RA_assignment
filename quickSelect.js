@@ -10,10 +10,16 @@ quickSelect.findMedian = (L) => {
 		return quickSelect.select(L, Math.floor(l / 2));
 	}
 	else {
-		let m1 = quickSelect.select(L, l / 2 - 1);
-		let m2 = quickSelect.select(L, l / 2);
+		let b = quickSelect.select(L, l / 2);
 
-		return (m1 + m2) / 2;
+		let a = -1;
+		for (let i=l/2-1; i<L.length; i++){
+			if (L[i] > a){
+				a = L[i];
+			}
+		}
+
+		return (a + b) / 2;
 	}
 };
 
@@ -37,7 +43,7 @@ quickSelect.select_rec = (L, left, right, k) => {
 	}
 
 	if (k > pivotIndex) {
-		return quickSelect.select_rec(L, pivotIndex + 1, right, k)
+		return quickSelect.select_rec(L, pivotIndex + 1, right, k);
 	}
 };
 
