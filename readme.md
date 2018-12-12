@@ -2,4 +2,4 @@
 
 ### Run the code
 
-node --stack-size=16000 main.js
+`node --stack-size=16000 main.js`
