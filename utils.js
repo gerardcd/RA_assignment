@@ -34,10 +34,6 @@ utils.sortedArray = (length, digits) => {
     return L;
 };
 
-utils.reversedArray = (length, digits) => {
-    return utils.sortedArray(length, digits).reverse();
-};
-
 utils.randomSet = (length, digits) => {
     let L = utils.sortedArray(length, digits);
     utils.randomPermutation(L);
