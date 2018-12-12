@@ -4,12 +4,7 @@ const utils = require('./utils');
 
 let randomPartition = {};
 
-randomPartition.partition = (L, left, right, randomPivot) => {
-    if (randomPivot) {
-        let pivotIndex = utils.randomInt(left, right);
-        utils.swap(L, left, pivotIndex);
-    }
-
+randomPartition.partition = (L, left, right) => {
     let pivot = L[left];
     let l = left + 1, r = right;
     while (true){
