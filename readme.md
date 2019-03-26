@@ -12,4 +12,4 @@ See the detailed explanation in the document [gerard.cegarra.RA.report.pdf](http
 
 ### See the results
 
-`Rscript Rcode.R`
+`Rscript Rcode.r`
