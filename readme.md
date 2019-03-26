@@ -9,3 +9,7 @@ See the detailed explanation in the document [gerard.cegarra.RA.report.pdf](http
 ### Run the code
 
 `node --stack-size=16000 main.js`
+
+### See the results
+
+`Rscript Rcode.R`
